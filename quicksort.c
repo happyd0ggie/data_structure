@@ -19,38 +19,27 @@ int main()
     return 0;
 }
 
-int partition(int arr[], int left, int right)
+void quicksort(int arr[], int l, int r)
 {
-    int i = left;
-    int j = right;
-    int pivot = arr[(left + right) / 2];  /* pick middle as pivot */
-    int tmp;
-    
-    while (i <= j)
+    if (l < r)  
     {
-        /* i scan from left to right */
-        while (arr[i] < pivot)
-            i++;
-        /* j scan from right to left */
-        while (arr[j] > pivot)
-            j--;
-        /* found the one that greater than pivot or less than pivot, swap */
-        if (i <= j)
-        {
-            swap(&arr[i], &arr[j]);
-            i++;
-            j--;
-        }
-    }
-
-    return i;
-}
-
-void quicksort(int arr[], int left, int right)
-{
-    int idx = partition(arr, left, right);
-    if (left < idx - 1)
-        quicksort(arr, left, idx - 1);
-    if (right > idx)
-        quicksort(arr, idx, right);
+        int i = l;
+        int j = r;
+        int pivot = arr[l];  
+        while (i < j)  
+        {  
+            while(i < j && arr[j] >= pivot) // 从右向左找第一个小于x的数  
+                j--;    
+            if(i < j)   
+                arr[i++] = arr[j];  
+              
+            while(i < j && arr[i] < pivot) // 从左向右找第一个大于等于x的数  
+                i++;    
+            if(i < j)   
+                arr[j--] = arr[i];  
+        }  
+        arr[i] = pivot;  
+        quicksort(arr, l, i - 1); // 递归调用   
+        quicksort(arr, i + 1, r);  
+    } 
 }
