@@ -1,43 +1,30 @@
-#include "common.h"
+#include "quick_sort.h"
 
-int main()
+void quick_sort(int *nums, int left, int right)
 {
-    int i;
-    int *nums = (int *)malloc(sizeof(int) * MAX_NUM);
-    srand(time(0));
-    for (i = 0; i < MAX_NUM; i++)
-    {
-        nums[i] = rand();
-    }
-    quick_sort(nums, 0, MAX_NUM);
-    for (i = 0; i < MAX_NUM; i++)
-        printf("%d ", nums[i]);
-	
-	getchar();
-    return 0;
-}
+	if (left < right)
+	{
+		int key = nums[left];  /* 选择第一个作为待比较的key */
+		int low = left;
+		int high = right;
 
-void quick_sort(int arr[], int l, int r)
-{
-    if (l < r)  
-    {
-        int i = l;
-        int j = r;
-        int pivot = arr[l];  
-        while (i < j)  
-        {  
-            while(i < j && arr[j] >= pivot) // 从右向左找第一个小于x的数  
-                j--;    
-            if(i < j)   
-                arr[i++] = arr[j];  
-              
-            while(i < j && arr[i] < pivot) // 从左向右找第一个大于等于x的数  
-                i++;    
-            if(i < j)   
-                arr[j--] = arr[i];  
-        }  
-        arr[i] = pivot;  
-        quick_sort(arr, l, i - 1); // 递归调用   
-        quick_sort(arr, i + 1, r);  
-    } 
+		while (low < high)
+		{
+			/* 从右向左扫描找到第一个小于key的位置 */
+			while (low < high && nums[high] > key)
+			{
+				high--;
+			}
+			nums[low] = nums[high];
+			/* 从左向右扫描找到第一个大于key的位置 */
+			while (low < high && nums[low] < key)
+			{
+				low++;
+			}
+			nums[high] = nums[low];
+		}
+		nums[low] = key;  /* key入位 */
+		quick_sort(nums, left, low - 1);  /* 递归排序左边 */
+		quick_sort(nums, low + 1, right);  /* 递归排序右边 */
+	}
 }
