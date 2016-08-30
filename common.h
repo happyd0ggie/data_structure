@@ -7,14 +7,7 @@
 /*#include <windows.h>*/
 #include <time.h>
 
-#define MAX_NUM 100
-
-/* function prototypes */
-void quick_sort(int arr[], int left, int right);
-void insert_sort(int arr[], int len);
-
-/* binary search in a sorted array */
-int binsearch(int arr[], int len, int value);
+#define MAX_NUMS_SIZE 100
 
 void swap(void *a, void *b);
 

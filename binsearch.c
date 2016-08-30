@@ -1,12 +1,4 @@
-#include "common.h"
-
-int main(int argc, char const *argv[])
-{
-	int arr[] = {1, 3, 9, 10, 23, 34, 58};
-	printf("%d\n", binsearch(arr, 7, 23));
-
-	return 0;
-}
+#include "binsearch.h"
 
 int binsearch(int arr[], int len, int value)
 {
