@@ -1,35 +1,27 @@
-#include "common.h"
+#include "bsearch.h"
 
-int main(int argc, char const *argv[])
+int *bsearch(int *nums, int nums_size, int key)
 {
-	int arr[] = {1, 3, 9, 10, 23, 34, 58};
-	printf("%d\n", binsearch(arr, 7, 23));
+	int *low = nums;
+	int *high = nums + nums_size;
+	int *mid;
 
-	return 0;
-}
-
-int binsearch(int arr[], int len, int value)
-{
-	int low = 0;
-	int high = len - 1;
-	int mid;
-
-	while (low <= high)
+	while (low < high)
 	{
-		mid = (low + high) / 2;
-		if (arr[mid] == value)
+		mid = low + ((high - low) >> 1);
+		if (key < *mid)
 		{
-			return mid;
+			high = mid;
 		}
-		else if (arr[mid] > value)
-		{
-			high = mid - 1;
-		}
-		else
+		else if (key > *mid)
 		{
 			low = mid + 1;
 		}
+		else
+		{
+			return mid;
+		}
 	}
 
-	return -1;
+	return NULL;
 }
