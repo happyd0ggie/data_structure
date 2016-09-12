@@ -1,2 +1,2 @@
 # data_structure
-data structure in case of memory loss^_^!
+data structure, standard form, marked here, review anytime
